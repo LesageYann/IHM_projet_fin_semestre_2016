@@ -2,7 +2,9 @@
  * gestion de l'éditeur de texte pur
  * pris en charge par : Yann
  */
-var text ={};
+var text ={
+    id:'text'
+};
 
 /*
  * retourne le html du composant sous la forme de string
@@ -14,3 +16,4 @@ text.getHTML=function(){
     return "html";
 };
 
+init.inject(text);

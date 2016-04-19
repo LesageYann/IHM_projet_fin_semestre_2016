@@ -10,3 +10,5 @@ nomdufichier.getHTML=function(){
     return "html";
 };
 
+
+init.inject(nomdufichier );

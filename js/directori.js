@@ -14,3 +14,5 @@ directori.getHTML=function(){
     return "html";
 };
 
+
+init.inject(directori);
