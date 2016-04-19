@@ -13,7 +13,14 @@ var text ={
  * On peut utilisez les promises js si vous préférez
  */
 text.getHTML=function(){
-    return "html";
+    var intInd="";
+    for(i=1;i<1000;i++){
+        intInd+=i+"<br />";  
+    }
+    return "<div>"+intInd+"</div><div id=\"text_content\"></div>";
 };
 
 init.inject(text);
+
+
+
