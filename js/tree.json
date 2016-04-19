@@ -1,0 +1,41 @@
+{"tree":[{
+    "nom": "Semestre 1",
+	"couleur": "#000",
+    "child":[{
+       "nom": "cours 1",
+		"couleur": "#F00",
+		"child":[{
+			"nom": "cours",
+			"couleur": "#000",
+            "child":[]
+		},
+		{
+			"nom": "TD",
+			"couleur": "#000",
+            "child":[]
+		},
+		{
+			"nom": "TP",
+			"couleur": "#000",
+            "child":[]
+		}]
+     },
+	 {
+       "nom": "cours 2",
+		"couleur": "#0F0",
+		"child":[{
+			"nom": "cours",
+			"couleur": "#000",
+            "child":[]
+		},{
+			"nom": "TD",
+			"couleur": "#000",
+            "child":[]
+		},{
+			"nom": "TP",
+			"couleur": "#000",
+            "child":[]
+		}]
+     }]
+ }]
+}
