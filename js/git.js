@@ -22,10 +22,11 @@ git.getHTML=function(){
     string += "Fichier partagé avec : <select id=\"usersShare\" size =\"1\"></select><br />";
     string += "<input type=\"text\" id=\"user\" list=\"usersList\" placeholder=\"ex: user4\">";
     string += "<datalist id=\"usersList\"></datalist>";
-    string += "<button id=\"addUsertoShare\"> Ajout </button>";
-    string += "<button id=\"delUsertoShare\"> Suppression </button><span id=\"error_add/del\" class=\"error\"></span>   <span id=\"right_add/del\" class=\"right\"></span><br />";
+    string += "<abbr title=\"Ajoute un utilisateur au partage\"><button id=\"addUsertoShare\"> Ajout </button></abbr>";
+    string += "<abbr title=\"Supprime un utilisateur du partage\"><button id=\"delUsertoShare\"> Supprimer </button> </abbr> <span id=\"error_add/del\" class=\"error\"></span>   <span id=\"right_add/del\" class=\"right\"></span><br />";
     string += "<button id=\"droits\"> Gérer les droits </button><br />";
-
+    string += "<div id=\"blank\" style=\"display:none; position:absolute; top:30%; left:20%;\">"
+    string += "<iframe id=\"frameRights\" src=\"droits.html\" width=\"200\" height=\"200\" onload=\"displayRights();\"></iframe> </div>"
     return string;
 };
 
@@ -37,7 +38,7 @@ var initText = document.getElementById("git init");
 var commitButton = document.getElementById("commit");
 var commitText = document.getElementById("git commit");
 var shareButton = document.getElementById("share");
-var droitButton = document.getElementById("droit");
+var droitButton = document.getElementById("droits");
 var error_init = document.getElementById("error_init");
 var error_commit = document.getElementById("error_commit");
 var right_init = document.getElementById("right_init");
@@ -49,6 +50,7 @@ var usersList = document.getElementById("usersList");
 var user = document.getElementById("user");
 var addUsertoShare = document.getElementById("addUsertoShare");
 var delUsertoShare = document.getElementById("delUsertoShare");
+var frame = document.getElementById("frameRights");
 var users = ["user1", "user2", "user3", "groupe1"];
 var allUsers = ["user1", "user2", "user3", "user4", "user5", "user6", "user7", "groupe1", "groupe2", "groupe3"];
 
@@ -140,3 +142,22 @@ function delUser(){
     }
 }
 delUsertoShare.addEventListener("click", delUser, false);
+
+//display the iframe
+function show() {
+	document.getElementById("blank").style.display="inline";
+}
+droitButton.addEventListener("click", show, false);
+
+function displayRights(){
+    var sContent = "<table border=1>"
+    sContent += "<caption> Gestion des droits</caption>";
+    sContent += "<tr> <th> Lecture </th> <th> Ecriture </th> <th> Utilisateur </th> </tr>";
+    for(var i = 0;i<users.length;i++){
+        sContent += "<tr> <td> <input type=\"checkbox\"> </td>";
+        sContent += "<td> <input type=\"checkbox\"> </td>";
+        sContent += "<td>" + users[i] + " </td></tr>";
+    }
+    sContent += "</table>";
+    frame.contentWindow.document.getElementById("test").innerHTML = sContent;
+}
