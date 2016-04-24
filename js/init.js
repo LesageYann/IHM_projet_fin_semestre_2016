@@ -2,11 +2,12 @@
  * fichier qui se déclenche au onload.
  * s'occupe des injections de html dans la page
  */
-var init={moduleElem:{}};
+var init={module:{}};
 
 init.inject=function (module){
-    init.moduleElem[module.id]=document.getElementById(module.id);
-    init.moduleElem[module.id].innerHTML=module.getHTML();
+    init.module[module.id]=module;
+    init.module[module.id].elem=document.getElementById(module.id);
+    init.module[module.id].elem.innerHTML=module.getHTML();
     if(module.afterInject){
         console.log("afterinject");
         module.afterInject();
@@ -15,9 +16,10 @@ init.inject=function (module){
 
 init.show=function(name){
     for(var i in init.moduleElem){
-        init.moduleElem[i].style.display='none';
+        init.module[i].elem.style.display='none';
     }
-    init.moduleElem[name].style.display='block';
+    init.module[name].elem.style.display='block';
+    init.actif=init.module[name];
 };
 
 document.getElementById("text_button").addEventListener('click',function(){
@@ -30,3 +32,6 @@ document.getElementById("photo_button").addEventListener('click',function(){
     init.show('photo');
 });
 
+document.body.addEventListener('keydown',function(event){
+    init.actif.onKeyDown(event);
+});

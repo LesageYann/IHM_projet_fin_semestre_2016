@@ -68,7 +68,7 @@ text.files={
  * On peut utilisez les promises js si vous préférez
  */
 text.getHTML=function(){
-    return "<div><div id=\"text_comp\"></div><div id=\"text_content\"></div></div>";
+    return "<div><div id=\"text_comp\"></div><div id=\"text_content\" contenteditable></div></div>";
 };
 
 /*
@@ -94,18 +94,17 @@ text.load=function (name){
 
 /*
  * un section est un titre si il ne comporte qu'une ligne
- * 
  */
-text.addSection=function(section){
+text.addSection=function(section,afterThis){
     if(!section){
         section={
             comprehension:0,
-            text:[""]
+            text:["."]
         };
     }
     text.sections.push(section);
     var string;
-    text.activeSection=document.createElement("div");
+    var newSection=document.createElement("div");
     if(section.text[0].length==1){
         string="<h2>"+section.text+"</h2>";
     }else{
@@ -114,11 +113,17 @@ text.addSection=function(section){
             string+="<p>"+section.text[i]+"</p>";
         }
     }
-    text.activeSection.innerHTML=string;
-    text.activeSection.colorNode=document.createElement("div");
-    text.activeSection.colorNode.style.background=text.color[section.comprehension];
-    text.content.appendChild(text.activeSection);
-    text.comp.appendChild(text.activeSection.colorNode);
+    newSection.innerHTML=string;
+    newSection.colorNode=document.createElement("div");
+    newSection.colorNode.style.background=text.color[section.comprehension];
+    if(afterThis){
+        text.content.insertBefore(newSection, afterThis.nextSibling);
+        text.comp.insertBefore(newSection.colorNode, afterThis.colorNode.nextSibling);
+    }else{
+        text.content.appendChild(newSection);
+        text.comp.appendChild(newSection.colorNode);
+    }
+    return newSection;
 };
 
 text.setActiveSection=function(section){
@@ -129,18 +134,23 @@ text.setActiveSection=function(section){
     }
     text.activeSection=section;
     text.activeSection.style.border="2px solid black";
-    text.activeSection.appendChild(text.decorateChild);
+    text.activeSection.insertBefore(text.decorateChild,text.activeSection.children[0]);
+    text.activeSection.focus();
 };
 
 text.handleClick=function(event){
     console.log("setActiveSection",event);
     if(event.target==text.content){
         text.addSection();
+        event.target=event.target.children[0];
     }else if(event.target.tagName=='DIV'){
         text.setActiveSection(event.target);
+        event.target=event.target.children[event.target.children-2];
     }else{
         text.setActiveSection(event.target.parentElement);
     }
+    console.log("focus on",event.target);
+    event.target.focus();
 };
 
 text.createBtn=function(recept,label,value,fct){
@@ -161,6 +171,23 @@ text.changeComp=function(event){
     text.activeSection.colorNode.style.background=text.color[event.target.comprehension];
 };
 
+text.onKeyDown=function(event){
+    console.log(event);
+    if(event.ctrlKey){
+        //aller a la section du dessus
+        //aller a la section du dessous, si pa de section
+        // retour a la première
+        //creer une section
+        if(event.keyCode==13){
+            text.setActiveSection(
+                    text.addSection(null,text.activeSection));
+        }
+        //mettre une note de comprehension
+    }else{
+        //document.activeElement
+    }
+};
+
 text.afterInject=function(){
     text.comp=document.getElementById("text_comp");
     text.content=document.getElementById("text_content");
@@ -174,7 +201,6 @@ text.afterInject=function(){
     text.createBtn(text.decorateChild,"moyen",3,text.changeComp);
     text.createBtn(text.decorateChild,"plutot oui",4,text.changeComp);
     text.createBtn(text.decorateChild,"totalement",5,text.changeComp);
-    
 };
 
 init.inject(text);
