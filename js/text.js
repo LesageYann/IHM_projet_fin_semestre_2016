@@ -113,6 +113,7 @@ text.addSection=function(section,afterThis){
             string+="<p>"+section.text[i]+"</p>";
         }
     }
+    newSection.sectionInfo=section;
     newSection.innerHTML=string;
     newSection.colorNode=document.createElement("div");
     newSection.colorNode.style.background=text.color[section.comprehension];
@@ -125,6 +126,10 @@ text.addSection=function(section,afterThis){
     }
     text.focusOnSec(newSection);
     return newSection;
+};
+
+text.correctElem=function(section){
+    
 };
 
 text.setActiveSection=function(section){
@@ -175,17 +180,58 @@ text.changeComp=function(event){
 text.onKeyDown=function(event){
     console.log(event);
     if(event.ctrlKey){
-        //aller a la section du dessus
+        event.preventDefault();
+        //aller a la section du dessussi pa de section
+        // retour a la dernière
+        if(event.keyCode==38){
+            if(text.activeSection &&  text.activeSection.previousSibling){
+                text.setActiveSection(text.activeSection.previousSibling);
+            }else{
+                text.setActiveSection(text.content.lastElementChild);
+            }
         //aller a la section du dessous, si pa de section
         // retour a la première
+        }else if(event.keyCode==40){
+            if(text.activeSection && text.activeSection.nextSibling){
+                text.setActiveSection(text.activeSection.nextSibling);
+            }else{
+                text.setActiveSection(text.content.firstElementChild);
+            }
         //creer une section
-        if(event.keyCode==13){
+        }else if(event.keyCode==13){
             text.setActiveSection(
                     text.addSection(null,text.activeSection));
         }
         //mettre une note de comprehension
     }else{
         //document.activeElement
+        if(text.activeSection && event.keyCode==38){
+            var anchor;
+            if (document.selection) {
+                
+            } else if (window.getSelection) {
+                anchor=window.getSelection().anchorNode;
+            }
+            if(anchor.parentElement.previousSibling!=text.decorateChild){
+                text.setActiveSection(anchor.parentElement.parentElement);
+            }else if(anchor.parentElement.parentElement.nextSibling){
+                text.setActiveSection(anchor.parentElement.parentElement.previousSibling);
+            }
+            
+        }else if(text.activeSection && event.keyCode==40){
+            var anchor;
+            if (document.selection) {
+                
+            } else if (window.getSelection) {
+                anchor=window.getSelection().anchorNode;
+            }
+            if(anchor.parentElement.nextSibling){
+                text.setActiveSection(anchor.parentElement.parentElement);
+            }else if(anchor.parentElement.parentElement.nextSibling){
+                text.setActiveSection(anchor.parentElement.parentElement.nextSibling);
+            }
+            
+        }
     }
 };
 
