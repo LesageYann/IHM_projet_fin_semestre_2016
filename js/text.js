@@ -201,6 +201,10 @@ text.onKeyDown=function(event){
         }else if(event.keyCode==13){
             text.setActiveSection(
                     text.addSection(null,text.activeSection));
+        }else if(event.keyCode>96 && event.keyCode<102){
+            console.log("change comprehension ",event.keyCode - 96)
+            text.activeSection.comprehension=event.keyCode-96;
+            text.activeSection.colorNode.style.background=text.color[event.keyCode-96];
         }
         //mettre une note de comprehension
     }else{
