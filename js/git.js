@@ -26,7 +26,7 @@ git.getHTML=function(){
     string += "<abbr title=\"Supprime un utilisateur du partage\"><button id=\"delUsertoShare\"> Supprimer </button> </abbr> <span id=\"error_add/del\" class=\"error\"></span>   <span id=\"right_add/del\" class=\"right\"></span><br />";
     string += "<button id=\"droits\"> Gérer les droits </button><br />";
     string += "<div id=\"blank\" style=\"display:none; position:absolute; top:30%; left:20%;\">"
-    string += "<iframe id=\"frameRights\" src=\"droits.html\" width=\"200\" height=\"200\" onload=\"displayRights();\"></iframe> </div>"
+    string += "<iframe id=\"frameRights\" src=\"droits.html\" width=\"300\" height=\"500\" onload=\"displayRights();\"></iframe> </div>"
     return string;
 };
 
@@ -61,11 +61,11 @@ commitText.style.visibility = "hidden";
 function submitGitInit(){
     var right = document.getElementById("true_init");
     if(initText.value == ""){
-        error_init.innerHTML = "Le nom du repository ne peut-être vide";
+        error_init.innerHTML = "<br />Le nom du repository ne peut-être vide";
         return;
     }
     error_init.innerHTML = "";
-    right_init.innerHTML = "Le dépôt a bien été créé.";
+    right_init.innerHTML = "<br />Le dépôt a bien été créé.";
     initText.style.visibility = "hidden";
     commitText.style.visibility = "visible";
     initButton.disabled = "disabled";
@@ -77,11 +77,12 @@ initButton.addEventListener("click", submitGitInit, false);
 function submitGitCommit(){
     right_init.innerHTML = "";
     if(commitText.value == ""){
-        error_commit.innerHTML = "Le message du commit ne peut-être vide";
+        error_commit.innerHTML = "<br />Le message du commit ne peut-être vide";
+        right_commit.innerHTML = "";
         return;
     }
     error_commit.innerHTML = "";
-    right_commit.innerHTML = "Le commit a bien été effectué.";
+    right_commit.innerHTML = "<br />Le commit a bien été effectué.";
     initText.style.visibility = "hidden";
     commitText.style.visibility = "visible";
     initButton.disabled = "disabled";
@@ -111,15 +112,15 @@ function addUser() {
 		if(users.indexOf(user.value) == -1){
 			users.push(user.value);
 			usersIntoSelect(usersShare);
-			right_add_del.innerHTML = user.value+" a bien été ajouté.";
+			right_add_del.innerHTML ="<br />" + user.value+" a bien été ajouté.";
             error_add_del.innerHTML = "";
 		}else{
             right_add_del.innerHTML = "";
-			error_add_del.innerHTML = user.value+" a déjà accès à ce fichier."
+			error_add_del.innerHTML = "<br />" + user.value+" a déjà accès à ce fichier."
 		}
 	}else{
         right_add_del.innerHTML = "";
-		error_add_del.innerHTML = user.value+" n'existe pas!";
+		error_add_del.innerHTML = "<br />" + user.value+" n'existe pas!";
 	}
 }
 addUsertoShare.addEventListener("click", addUser, false);
@@ -129,16 +130,16 @@ function delUser(){
     if(allUsers.indexOf(user.value) != -1){
         if(users.indexOf(user.value) == -1){
             right_add_del.innerHTML = "";
-            error_add_del.innerHTML = user.value+" n'a pas accès à ce fichier.";
+            error_add_del.innerHTML = "<br />" + user.value+" n'a pas accès à ce fichier.";
         } else {
             users.splice(users.indexOf(user.value),1);
             usersIntoSelect(usersShare);
-            right_add_del.innerHTML = user.value+" a bien été supprimé.";
+            right_add_del.innerHTML = "<br />" + user.value+" a bien été supprimé.";
             error_add_del.innerHTML = "";
         }
     }else {
         right_add_del.innerHTML = "";
-        error_add_del.innerHTML = user.value + " n'existe pas";
+        error_add_del.innerHTML = "<br />" + user.value + " n'existe pas";
     }
 }
 delUsertoShare.addEventListener("click", delUser, false);
@@ -146,9 +147,12 @@ delUsertoShare.addEventListener("click", delUser, false);
 //display the iframe
 function show() {
 	document.getElementById("blank").style.display="inline";
+    frame.style.display = "";
+    frame.src = frame.src;
 }
 droitButton.addEventListener("click", show, false);
 
+//display the rights in iframe
 function displayRights(){
     var sContent = "<table border=1>"
     sContent += "<caption> Gestion des droits</caption>";
@@ -160,4 +164,9 @@ function displayRights(){
     }
     sContent += "</table>";
     frame.contentWindow.document.getElementById("test").innerHTML = sContent;
+}
+
+//close the iframe
+function closeFrame() {
+    frame.style.display ="none";
 }
