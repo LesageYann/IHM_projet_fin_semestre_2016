@@ -1,0 +1,69 @@
+Legende :
+	-Q = Question
+	-R1 = Réponse de la première personne
+	-R2 = Réponse de la deuxième personne
+	
+------------------------------------------------Spé dirigées-----------------------------------------
+Q: Avez-vous oerdu des notes le mois dernier?
+R1: Non.
+R2: Oui.
+
+Q: Echangez-vous vos notes?
+R1: Non.
+R2: Jamais, mais partagais avec ceux qui ne venez pas et récupérer ceux que j'ai loupé.
+
+Q: Numérisez-vous vos notes? 
+R1: Parfois.
+R2: Non.
+
+Q: Combien de temps conservez-vous vos notes?
+R1: 1 an ou 2.
+R2: Tout le temps.
+
+Q: Combien de feuilles A4 utilisez-vous dans un cours? 
+R1: 1 feuille par amphi, 2 par TD.
+R2: 1 copie double.
+
+
+------------------------------------------------Spé dirigées-----------------------------------------
+Q: Cette semaine, avez-vous pris des notes en amphi? Si oui, comment?
+R1: Non.
+R2: Oui, sur papier.
+
+Q: Pour les partiels, avez-vous relu vos notes?
+R1: Oui.
+R2: Beaucoup et refaire les TDs.
+
+Q: Avez-vous des difficultés à retrouver des informations dans vos notes? Si oui, pourquoi? 
+R1: Non.
+R2: Neutre, dépend si les notes ont été bien prises ou non.
+
+Q: Avez-vous récemment cherché des informations qui n'étaient pas notées? Si oui, qu'avez-vous fait?
+R1: Rarement, tant pis si je ne les ai pas.
+R2: Oui, bouquins ou quelqu'un de confiance.
+
+Q: Classifiez-vous vos notes? Si oui, comment?
+R1: Par date et par matière.
+R2: Par matière et par date.
+
+
+------------------------------------------------Générales ouvertes-----------------------------------------
+Q: Comment choisissez-vous vos abréviations?
+R1: Sigles, abréviations communes.
+R2: Code personnel.
+
+Q: Vous préférez les prendre sur quel support?
+R1: Ordinateur.
+R2: Ordinateur.
+
+Q: Utilisez-vous des applications de prise de notes?
+R1: Editeur de textes.
+R2: Goodnotes ou fichier texte dropbox ou SublimeText
+
+Q: Avez-vous recours à des astuces particulières?
+R1: Non.
+R2: Non.
+
+Q: Trouvez-vous que vos notes sont utiles? 
+R1: en amphi non, en TD par contre souvent.
+R2: Oui, toujours.

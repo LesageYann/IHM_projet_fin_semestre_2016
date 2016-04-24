@@ -21,6 +21,3 @@ text.getHTML=function(){
 };
 
 init.inject(text);
-
-
-
