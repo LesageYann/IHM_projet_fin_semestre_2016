@@ -5,23 +5,29 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/git.css">
+        <link rel="stylesheet" href="css/app.css" />
     </head>
     <body>
+        <!--mise en place vertical flexible dans body-->
+      <div id="middle">
+        <!-- middle prend la place vertical restant dans body-->
+        <!--mise en place horizontal flexible dans middle-->
         <nav><ul>
-            <li>TEXTE</li>
-            <li>SCHEMA</li>
-            <li>PHOTO</li>
+            <li id="text_button">TEXTE</li>
+            <li id="schema_button">SCHEMA</li>
+            <li id="photo_button">PHOTO</li>
         </ul></nav>
-        <div>
+        <div id="frame">
             <div id="text"></div>
             <div id="schema"></div>
             <div id="photo"></div>
             <div id="directori"></div>
         </div>
         <div id="git"></div>
-        <script src="js/init.js"></script>
-        <script src="js/text.js"></script>
-        <script src="js/directori.js"></script>
-        <script src="js/git.js"></script>
+      </div>
+      <script src="js/init.js"></script>
+      <script src="js/text.js"></script>
+      <script src="js/directori.js"></script>
+      <script src="js/git.js"></script>
     </body>
 </html>
