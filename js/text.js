@@ -123,6 +123,7 @@ text.addSection=function(section,afterThis){
         text.content.appendChild(newSection);
         text.comp.appendChild(newSection.colorNode);
     }
+    text.focusOnSec(newSection);
     return newSection;
 };
 
@@ -185,6 +186,28 @@ text.onKeyDown=function(event){
         //mettre une note de comprehension
     }else{
         //document.activeElement
+    }
+};
+
+text.focusOnSec=function(section){
+    var node = section.children[section.children.length-1].childNodes[0],
+        range = null,
+        sel = null;
+
+    if(node){
+        console.log("node to focus", node);
+        node.parentElement.focus();
+        if (document.selection) {
+            range = document.body.createTextRange();
+            range.moveToElementText(node);
+            range.select();
+        } else if (window.getSelection) {
+            range = document.createRange();
+            range.selectNode(node);
+            sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
     }
 };
 
