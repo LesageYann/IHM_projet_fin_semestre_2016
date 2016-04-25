@@ -23,12 +23,23 @@ git.getHTML=function(){
     string += "<abbr title=\"Ajoute un utilisateur au partage\"><button id=\"addUsertoShare\"> Ajout </button></abbr>";
     string += "<abbr title=\"Supprime un utilisateur du partage\"><button id=\"delUsertoShare\"> Supprimer </button> </abbr> <span id=\"error_add/del\" class=\"error\"></span>   <span id=\"right_add/del\" class=\"right\"></span><br />";
     string += "<button id=\"droits\" onclick =\"document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'\"> Gérer les droits </button><br />";
-    string += "Langue: <select id=\"language\" size=\"1\"></select>";
+    string += "Langue: <select id=\"language\" onchange=\"switchLang(this);\" size=\"1\"></select>";
     string += "<div id=\"light\" class=\"white_content\"></div><div id=\"fade\" class=\"black_overlay\"></div>";
     return string;
 };
 
+function switchLang(lang){
+	if(lang.value == "english")
+		text.files  = eng;
+	else if(lang.value == "deutsch")
+		text.files  = deu;
+	else
+		text.files  = fran;
+
+	init.inject(text);
+}
 init.inject(git);
+
 
 //All the variables
 var initButton = document.getElementById("init");
@@ -164,4 +175,5 @@ function displayRights(){
     sContent += "<Button id=\"submitRights\" onclick =\"document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'\"> Valider les modifications</button>";
     lightbox.innerHTML = sContent;
 }
+
 droitButton.addEventListener("click", displayRights,false);
