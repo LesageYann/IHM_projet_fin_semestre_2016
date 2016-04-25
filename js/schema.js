@@ -46,20 +46,21 @@ schema.afterInject=function(){
     schema.pathElem=document.getElementById("schem_path");
     document.getElementById("schem_add").onclick=function(){
         
-    }
+    };
     schema.pathElem.onclick=function(){
         schema.pathMethod= "stroke";
 //        schema.pathElem.parentNode.insertBefore(schema.strokeSize,schema.pathElem.nextSibling)
-    }
+    };
     document.getElementById("schem_fill").onclick=function(){
         schema.pathMethod= "fill";
-    }
+    };
     document.getElementById("schem_attach").onclick=function(){
+        text.addImgSection(schema.canvas.toDataURL());
+        init.show('text');
         
-    }
+    };
     document.getElementById("schem_erase").onclick=function(){
-        
-    }
+    };
 };
 
 init.inject(schema);

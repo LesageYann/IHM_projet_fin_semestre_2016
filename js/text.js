@@ -132,6 +132,27 @@ text.correctElem=function(section){
     
 };
 
+text.addImgSection=function(data){
+    console.log("addimg");
+    var section={
+        comprehension:0,
+        img:data
+    };
+    text.sections.push(section);
+    var string;
+    var newSection=document.createElement("img");
+    newSection.src=data;
+    newSection.style.maxWidth="500px";
+    console.log("src ok");
+    newSection.sectionInfo=section;
+    newSection.innerHTML=string;
+    newSection.colorNode=document.createElement("div");
+    newSection.colorNode.style.background=text.color[section.comprehension];
+    text.content.appendChild(newSection);
+    text.comp.appendChild(newSection.colorNode);
+    return newSection;
+};
+
 text.setActiveSection=function(section){
     console.log("setActiveSection",section);
     if(text.activeSection){
