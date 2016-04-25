@@ -8,16 +8,16 @@ var text ={
     activeSection:null,
     color:[
         "#F0F0F0",
-        "#F01000",
-        "#F04000",
-        "#B05000",
-        "#405000",
-        "#005000"
+        "#A00",
+        "#F00",
+        "#FF3",
+        "#0A0",
+        "#060"
     ]
 };
 
 /*ensemble de fichier fake
- * 
+ *
  */
 text.files={
     ihm:[{
@@ -58,7 +58,7 @@ text.files={
         comprehension:5,
         text:[""]
     }
-    ]  
+    ]
 };
 
 /*
@@ -74,7 +74,7 @@ text.getHTML=function(){
 /*
  * function fake
  * devrait se connecter au serveur pour récupérer le fichier
- * 
+ *
  */
 text.getFile=function(name){
     return text.files[name];
@@ -195,12 +195,12 @@ text.afterInject=function(){
     init.show('text');
     text.content.addEventListener('click',text.handleClick);
     text.decorateChild=document.createElement("div");
-    text.decorateChild.innerHTML="compris : ";
-    text.createBtn(text.decorateChild,"pas du tout",1,text.changeComp);
-    text.createBtn(text.decorateChild,"pas trop",2,text.changeComp);
-    text.createBtn(text.decorateChild,"moyen",3,text.changeComp);
-    text.createBtn(text.decorateChild,"plutot oui",4,text.changeComp);
-    text.createBtn(text.decorateChild,"totalement",5,text.changeComp);
+    text.decorateChild.innerHTML="Compris ? ";
+    text.createBtn(text.decorateChild,"Pas du tout",1,text.changeComp);
+    text.createBtn(text.decorateChild,"Pas trop",2,text.changeComp);
+    text.createBtn(text.decorateChild,"Moyennement",3,text.changeComp);
+    text.createBtn(text.decorateChild,"Plutôt oui",4,text.changeComp);
+    text.createBtn(text.decorateChild,"Totalement",5,text.changeComp);
 };
 
 
