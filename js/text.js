@@ -17,14 +17,22 @@ var text ={
 };
 
 /*ensemble de fichier fake
- * 
+ *
  */
 text.files={
     ihm:[{
         comprehension:5,
+        id: "titre",
+        textFr:"IHM  dernier cours",
         text:"IHM  dernier cours"
     },{
         comprehension:5,
+        id: "Déficiences physiques",
+        textFr:["Déficiences physiques",
+            "Vue et ouïe qui baissent",
+            "Baisse de la coordination œil/main",
+            "Arthrite et tremblements qui baissent la dextérité"
+        ],
         text:["Déficiences physiques",
             "Vue et ouïe qui baissent",
             "Baisse de la coordination œil/main",
@@ -32,6 +40,13 @@ text.files={
         ]
     },{
         comprehension:5,
+        id: "Déficiences psychiques",
+        textFr:["Déficiences psychiques",
+            "Confusions",
+            "Perte de mémoire",
+            "Diminution dans la confiance de prise de décision",
+            "Ne distinguent pas ce qui est pertinent et ce qui ne l’est pas"
+        ],
         text:["Déficiences psychiques",
             "Confusions",
             "Perte de mémoire",
@@ -40,26 +55,47 @@ text.files={
         ]
     },{
         comprehension:5,
-        text:["Conséquences",
+        id: "Conséquences",
+        textFr:["Conséquences",
             "Anxiété, frustration",
             "Peur de paraître stupide",
             "Peur de l’échec",
             "Peur de casser",
             "Redoute les changements"
+        ],
+        text:["Conséquences",
+            "Anxiety, frustration",
+            "Fear of looking stupid",
+            "Fear of failure",
+            "Peur de casser",
+            "Redoute les changements"
         ]
     },{
         comprehension:5,
-        text:[
+        id: "Problèmes",
+        textFr:[
             "Problèmes",
             "Difficulté pour apprendre",
             "Manque d’intérêt"
+        ],
+        text:[
+            "Problems",
+            "Difficulty to learn",
+            "Lack of interest. Merci google trad"
         ]
     },{
         comprehension:5,
-        text:[""]
+        textFr:[""],
+        text:[""],
     }
-    ]  
+    ]
 };
+
+var lang;
+window.onload = function() {
+    lang = document.getElementById("language").value;
+};
+
 
 /*
  * retourne le html du composant sous la forme de string
@@ -68,13 +104,14 @@ text.files={
  * On peut utilisez les promises js si vous préférez
  */
 text.getHTML=function(){
-    return "<div><div id=\"text_comp\"></div><div id=\"text_content\" contenteditable></div></div>";
+    string = "<div><div id=\"text_comp\"></div><div id=\"text_content\" contenteditable></div></div>";
+    return string;
 };
 
 /*
  * function fake
  * devrait se connecter au serveur pour récupérer le fichier
- * 
+ *
  */
 text.getFile=function(name){
     return text.files[name];
@@ -99,20 +136,35 @@ text.addSection=function(section,afterThis){
     if(!section){
         section={
             comprehension:0,
+            textFr:["."],
             text:["."]
         };
     }
     text.sections.push(section);
     var string;
+    var language;
+    //switch the language
+    if (lang == "français" && typeof section.textFr != "undefined")
+        language = section.textFr;
+    else if (lang == "english" && typeof section.textEn != "undefined")
+        language = section.textEn;
+    else if (lang == "deutsch" && typeof section.textFr != "undefined")
+        language = section.textDe;
+    else
+        language = section.textFr;
+
+
     var newSection=document.createElement("div");
-    if(section.text[0].length==1){
-        string="<h2>"+section.text+"</h2>";
+    string = "<div id=\"" + section.id + " \">";
+    if(language[0].length==1){
+        string+="<h2>"+language+"</h2>";
     }else{
-        string="<h3>"+section.text[0]+"</h3>";
-        for(var i=1;i<section.text.length;i++){
-            string+="<p>"+section.text[i]+"</p>";
+        string+="<h3>"+language[0]+"</h3>";
+        for(var i=1;i<language.length;i++){
+            string+="<p>"+language[i]+"</p>";
         }
     }
+    string += "</div>";
     newSection.innerHTML=string;
     newSection.colorNode=document.createElement("div");
     newSection.colorNode.style.background=text.color[section.comprehension];
@@ -180,7 +232,7 @@ text.onKeyDown=function(event){
         //creer une section
         if(event.keyCode==13){
             text.setActiveSection(
-                    text.addSection(null,text.activeSection));
+                    text.addSection(null, text.activeSection));
         }
         //mettre une note de comprehension
     }else{

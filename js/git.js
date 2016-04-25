@@ -6,8 +6,6 @@ var git ={
     id:'git'
 };
 
-//var user = {Aristide, Quentin, Rémy, Yann};
-
 /*
  * retourne le html du composant sous la forme de string
  * utiliser une requete ajax pour charger un fichier
@@ -19,14 +17,14 @@ git.getHTML=function(){
     string += "<button id=\"init\"> Git init </button>  <span id=\"error_init\" class=\"error\"></span> <span id=\"right_init\" class=\"right\">  </span>    <br />";
     string += "<input type=\"text\" id=\"git commit\" placeholder=\"Nom du commit\">";
     string += "<button id=\"commit\" disabled=\"disabled\"> Commit </button>    <span id=\"error_commit\" class=\"error\"></span>   <span id=\"right_commit\" class=\"right\"></span>   <br />";
-    string += "Fichier partagé avec : <select id=\"usersShare\" size =\"1\"></select><br />";
+    string += "Fichier partagé avec : <select id=\"usersShare\" size =\"2\"></select><br />";
     string += "<input type=\"text\" id=\"user\" list=\"usersList\" placeholder=\"ex: user4\">";
     string += "<datalist id=\"usersList\"></datalist>";
     string += "<abbr title=\"Ajoute un utilisateur au partage\"><button id=\"addUsertoShare\"> Ajout </button></abbr>";
     string += "<abbr title=\"Supprime un utilisateur du partage\"><button id=\"delUsertoShare\"> Supprimer </button> </abbr> <span id=\"error_add/del\" class=\"error\"></span>   <span id=\"right_add/del\" class=\"right\"></span><br />";
-    string += "<button id=\"droits\"> Gérer les droits </button><br />";
-    string += "<div id=\"blank\" style=\"display:none; position:absolute; top:30%; left:20%;\">"
-    string += "<iframe id=\"frameRights\" src=\"droits.html\" width=\"300\" height=\"500\" onload=\"displayRights();\"></iframe> </div>"
+    string += "<button id=\"droits\" onclick =\"document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'\"> Gérer les droits </button><br />";
+    string += "Langue: <select id=\"language\" size=\"1\"></select>";
+    string += "<div id=\"light\" class=\"white_content\"></div><div id=\"fade\" class=\"black_overlay\"></div>";
     return string;
 };
 
@@ -51,8 +49,11 @@ var user = document.getElementById("user");
 var addUsertoShare = document.getElementById("addUsertoShare");
 var delUsertoShare = document.getElementById("delUsertoShare");
 var frame = document.getElementById("frameRights");
+var language = document.getElementById("language");
+var lightbox = document.getElementById("light");
 var users = ["user1", "user2", "user3", "groupe1"];
 var allUsers = ["user1", "user2", "user3", "user4", "user5", "user6", "user7", "groupe1", "groupe2", "groupe3"];
+var languagesList = ["français", "english", "deutsch"];
 
 //hide the textbox for commit
 commitText.style.visibility = "hidden";
@@ -90,13 +91,14 @@ function submitGitCommit(){
 }
 commitButton.addEventListener("click", submitGitCommit, false);
 
-//put the users into the select
-function usersIntoSelect(select) {
-    select.innerHTML = "";
-    for(var i = 0;i<users.length;i++)
-        select.innerHTML += "<option>" + users[i];
+//put a list into a select
+function putIntoSelect(list, id) {
+    id.innerHTML = "";
+    for(var i = 0;i<list.length;i++)
+        id.innerHTML += "<option>" + list[i];
 }
-usersIntoSelect(usersShare);
+putIntoSelect(users, usersShare);
+putIntoSelect(languagesList, language);
 
 //put all the users into the dataList
 function addUsersToDataList(datalist){
@@ -144,15 +146,8 @@ function delUser(){
 }
 delUsertoShare.addEventListener("click", delUser, false);
 
-//display the iframe
-function show() {
-	document.getElementById("blank").style.display="inline";
-    frame.style.display = "";
-    frame.src = frame.src;
-}
-droitButton.addEventListener("click", show, false);
 
-//display the rights in iframe
+//display the rights in lightbox
 function displayRights(){
     var sContent = "<table border=1>"
     sContent += "<caption> Gestion des droits</caption>";
@@ -163,10 +158,6 @@ function displayRights(){
         sContent += "<td>" + users[i] + " </td></tr>";
     }
     sContent += "</table>";
-    frame.contentWindow.document.getElementById("test").innerHTML = sContent;
-}
-
-//close the iframe
-function closeFrame() {
-    frame.style.display ="none";
+    sContent += "<Button id=\"submitRights\" onclick =\"document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'\"> Valider les modifications</button>";
+    lightbox.innerHTML = sContent;
 }
