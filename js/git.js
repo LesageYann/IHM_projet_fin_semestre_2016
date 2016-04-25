@@ -113,7 +113,7 @@ function addUser() {
 	if(allUsers.indexOf(user.value) != -1){
 		if(users.indexOf(user.value) == -1){
 			users.push(user.value);
-			usersIntoSelect(usersShare);
+			putIntoSelect(users, usersShare);
 			right_add_del.innerHTML ="<br />" + user.value+" a bien été ajouté.";
             error_add_del.innerHTML = "";
 		}else{
@@ -135,7 +135,7 @@ function delUser(){
             error_add_del.innerHTML = "<br />" + user.value+" n'a pas accès à ce fichier.";
         } else {
             users.splice(users.indexOf(user.value),1);
-            usersIntoSelect(usersShare);
+            putIntoSelect(users, usersShare);
             right_add_del.innerHTML = "<br />" + user.value+" a bien été supprimé.";
             error_add_del.innerHTML = "";
         }
@@ -161,3 +161,4 @@ function displayRights(){
     sContent += "<Button id=\"submitRights\" onclick =\"document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'\"> Valider les modifications</button>";
     lightbox.innerHTML = sContent;
 }
+droitButton.addEventListener("click", displayRights,false);
