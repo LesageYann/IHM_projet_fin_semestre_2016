@@ -17,7 +17,7 @@ git.getHTML=function(){
     string += "<button id=\"init\"> Git init </button>  <span id=\"error_init\" class=\"error\"></span> <span id=\"right_init\" class=\"right\">  </span>    <br />";
     string += "<input type=\"text\" id=\"git commit\" placeholder=\"Nom du commit\">";
     string += "<button id=\"commit\" disabled=\"disabled\"> Commit </button>    <span id=\"error_commit\" class=\"error\"></span>   <span id=\"right_commit\" class=\"right\"></span>   <br />";
-    string += "Fichier partagé avec : <select id=\"usersShare\" size =\"2\"></select><br />";
+    string += "Fichier partagé avec : <select id=\"usersShare\" size =\"1\"></select><br />";
     string += "<input type=\"text\" id=\"user\" list=\"usersList\" placeholder=\"ex: user4\">";
     string += "<datalist id=\"usersList\"></datalist>";
     string += "<abbr title=\"Ajoute un utilisateur au partage\"><button id=\"addUsertoShare\"> Ajout </button></abbr>";
@@ -92,13 +92,16 @@ function submitGitCommit(){
 commitButton.addEventListener("click", submitGitCommit, false);
 
 //put a list into a select
-function putIntoSelect(list, id) {
+function putIntoSelect(list, id, disabled) {
     id.innerHTML = "";
+    var stringDisabled = "";
+    if(disabled == true)
+        stringDisabled = "disabled=\"true\"";
     for(var i = 0;i<list.length;i++)
-        id.innerHTML += "<option>" + list[i];
+        id.innerHTML += "<option "+stringDisabled + ">" + list[i];
 }
-putIntoSelect(users, usersShare);
-putIntoSelect(languagesList, language);
+putIntoSelect(users, usersShare, true);
+putIntoSelect(languagesList, language, false);
 
 //put all the users into the dataList
 function addUsersToDataList(datalist){
