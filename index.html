@@ -24,6 +24,14 @@
             <div id="directori"></div>
         </div>
         <div id="git"></div>
+		<div id="quiz">
+			<button onclick="startQuiz()">Start Quiz</button><br/>
+			<button onclick="stopQuiz()">Stop Quiz</button></br/>
+						<button onclick="finQuiz()">fin Quiz</button></br/>
+
+			
+		</div>
+
       </div>
       <script src="js/init.js"></script>
       <script src="js/text.js"></script>
@@ -31,3 +39,52 @@
       <script src="js/git.js"></script>
     </body>
 </html>
+
+
+
+<script>
+var textInit=[];
+function startQuiz(){
+	var p = document.getElementById("text");
+	var m = p.getElementsByTagName("p");
+	for(var i = 0 ; i < m.length;i++){
+		var text = m[i].innerHTML;
+		textInit.push(text);
+		var tab = text.split(" ");
+		var newText = "";
+		for(var j = 0; j < tab.length;j++){
+			var random = Math.floor((Math.random() * 10) + 1);
+			if((random < 5)&&(tab[j].length > 3))
+				newText = newText+" "+'<input class="rep" type="text" name="fname" reponse='+tab[j]+'>';
+			else
+				newText = newText+" "+tab[j];		
+		}
+		m[i].innerHTML = newText;
+	}
+}
+
+function stopQuiz(){
+	var p = document.getElementById("text");
+	var m = p.getElementsByTagName("p");
+	for(var i = 0 ; i < m.length;i++){
+		
+		m[i].innerHTML = textInit[i];
+		  }
+}
+
+
+function finQuiz(){
+	var m = document.getElementsByClassName("rep");
+	var k = 0;
+	for(var i = 0 ; i < m.length;i++){
+		var rep = m[i].getAttribute("reponse");
+		var r = m[i].value;
+		if(r == rep)
+			k++;
+	  }
+
+	  alert(k+" bonne reponse");
+
+}
+
+</script>
