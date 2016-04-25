@@ -15,11 +15,15 @@ init.inject=function (module){
 };
 
 init.show=function(name){
-    for(var i in init.moduleElem){
+    console.log("show",init.module)
+    for(var i in init.module){
+        console.log(i);
         init.module[i].elem.style.display='none';
+        console.log(i,init.module[i].elem.style.display);
     }
     init.module[name].elem.style.display='block';
     init.actif=init.module[name];
+    init.module['git'].elem.style.display='block';
 };
 
 document.getElementById("text_button").addEventListener('click',function(){
@@ -27,6 +31,11 @@ document.getElementById("text_button").addEventListener('click',function(){
 });
 document.getElementById("schema_button").addEventListener('click',function(){
     init.show('schema');
+    schema.canvas.width=schema.canvas.offsetWidth;
+    schema.canvas.height=schema.canvas.offsetHeight;
+    schema.ctx=schema.canvas.getContext("2d");
+    schema.pathMethod= schema.ctx.fill;
+    schema.ctx.fillStyle = "red";
 });
 document.getElementById("photo_button").addEventListener('click',function(){
     init.show('photo');

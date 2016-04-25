@@ -87,6 +87,21 @@ ul {
 }
 
 /*schema*/
+#schema_flex {
+    display: flex;
+    height: 100%;
+}
+#schema_canvas {
+    background: white;
+    flex-grow: 1;
+}
+#schema_tools {
+    min-width: 20px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #c5c5c5;
+    border-radius: 5px;
+}
 
 /*directorie*/
 
