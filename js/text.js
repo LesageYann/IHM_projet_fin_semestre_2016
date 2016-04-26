@@ -59,7 +59,12 @@ text.files={
         text:[""]
     }
     ]
+ };
+var lang;
+window.onload = function() {
+    lang = document.getElementById("language").value;
 };
+
 
 /*
  * retourne le html du composant sous la forme de string
@@ -68,7 +73,8 @@ text.files={
  * On peut utilisez les promises js si vous préférez
  */
 text.getHTML=function(){
-    return "<div><div id=\"text_comp\"></div><div id=\"text_content\" contenteditable></div></div>";
+    string = "<div><div id=\"text_comp\"></div><div id=\"text_content\" contenteditable></div></div>";
+    return string;
 };
 
 /*
@@ -104,16 +110,19 @@ text.addSection=function(section,afterThis){
     }
     text.sections.push(section);
     var string;
+
     var newSection=document.createElement("div");
+    string = "<div id=\"" + section.id + " \">";
     if(section.text[0].length==1){
-        string="<h2>"+section.text+"</h2>";
+        string+="<h2>"+section.text+"</h2>";
     }else{
-        string="<h3>"+section.text[0]+"</h3>";
+        string+="<h3>"+section.text[0]+"</h3>";
         for(var i=1;i<section.text.length;i++){
             string+="<p>"+section.text[i]+"</p>";
         }
     }
     newSection.sectionInfo=section;
+    string += "</div>";
     newSection.innerHTML=string;
     newSection.colorNode=document.createElement("div");
     newSection.colorNode.style.background=text.color[section.comprehension];
@@ -221,11 +230,12 @@ text.onKeyDown=function(event){
         //creer une section
         }else if(event.keyCode==13){
             text.setActiveSection(
-                    text.addSection(null,text.activeSection));
+            text.addSection(null,text.activeSection));
         }else if(event.keyCode>96 && event.keyCode<102){
             console.log("change comprehension ",event.keyCode - 96)
             text.activeSection.comprehension=event.keyCode-96;
             text.activeSection.colorNode.style.background=text.color[event.keyCode-96];
+            text.addSection(null, text.activeSection);
         }
         //mettre une note de comprehension
     }else{
@@ -297,5 +307,151 @@ text.afterInject=function(){
     text.createBtn(text.decorateChild,"Totalement",5,text.changeComp);
 };
 
+var fran={
+    ihm:[{
+        comprehension:5,
+        id: "titre",
+        text:"IHM  dernier cours"
+    },{
+        comprehension:5,
+        id: "Déficiences physiques",
+        text:["Déficiences physiques",
+            "Vue et ouïe qui baissent",
+            "Baisse de la coordination œil/main",
+            "Arthrite et tremblements qui baissent la dextérité"
+        ]
+    },{
+        comprehension:5,
+        id: "Déficiences psychiques",
+        text:["Déficiences psychiques",
+            "Confusions",
+            "Perte de mémoire",
+            "Diminution dans la confiance de prise de décision",
+            "Ne distinguent pas ce qui est pertinent et ce qui ne l’est pas"
+        ]
+    },{
+        comprehension:5,
+        id: "Conséquences",
+        text:["Conséquences",
+            "Anxiety, frustration",
+            "Fear of looking stupid",
+            "Fear of failure",
+            "Peur de casser",
+            "Redoute les changements"
+        ]
+    },{
+        comprehension:5,
+        id: "Problèmes",
+        text:[
+            "Problems",
+            "Difficulty to learn",
+            "Lack of interest. Merci google trad"
+        ]
+    },{
+        comprehension:5,
+        text:[""],
+    }
+    ]
+};
+
+
+
+
+var eng={
+    ihm:[{
+        comprehension:5,
+        id: "title",
+        text:"Last class IHM"
+    },{
+        comprehension:5,
+        id: "Physical disabilities",
+        text:["Physical disabilities",
+            "Sight and hearing that lower",
+            "Decreased coordination eye/hand",
+            "Arthritis and tremors that lower dexterity"
+        ]
+    },{
+        comprehension:5,
+        id: "Psychiatric disabilities",
+        text:["Psychiatric disabilities",
+            "Confusions",
+            "Memory loss",
+            "Decrease in the confidence of decision",
+            "Do not distinguish what is relevant and what is not"
+        ]
+    },{
+        comprehension:5,
+        id: "Consequences",
+        text:["Consequences",
+            "Anxiety, frustration",
+            "Fear of looking stupid",
+            "Fear of failure",
+            "Afraid of breaking",
+            "Fear changes"
+        ]
+    },{
+        comprehension:5,
+        id: "Problems",
+        text:[
+            "Problems",
+            "Difficulty to learn",
+            "Lack of interest."
+        ]
+    },{
+        comprehension:5,
+        text:[""],
+    }
+    ]
+};
+
+
+var deu={
+    ihm:[{
+        comprehension:5,
+        id: "Titel",
+        text:"IHM  neueste Preis"
+    },{
+        comprehension:5,
+        id: "körperlichen Behinderungen",
+        text:["körperlichen Behinderungen",
+            "Sehen und Hören, dass niedrigere",
+            "Verminderte Koordination Auge / Hand",
+            "Arthritis und Zittern dass niedrigere Geschicklichkeit"
+        ]
+    },{
+        comprehension:5,
+        id: "Psychiatrischen Behinderungen",
+        text:["Psychiatrischen Behinderungen",
+            "Verwirrungen",
+            "Gedächtnisschwund",
+            "Verringern Sie in das Vertrauen der Entscheidung",
+            "Sie unterscheiden nicht, was relevant ist und was nicht"
+        ]
+    },{
+        comprehension:5,
+        id: "Nachwirkungen",
+        text:["Nachwirkungen",
+            "Angst, Frustration",
+            "Die Angst vor der Suche dumm",
+            "Angst vor dem Scheitern",
+            "Angst vor Bruch",
+            "Angst Änderungen"
+        ]
+    },{
+        comprehension:5,
+        id: "Schwierigkeiten",
+        text:[
+            "Schwierigkeiten",
+            "Schwierigkeit zu lernen",
+            "Desinteresse"
+        ]
+    },{
+        comprehension:5,
+        text:[""],
+    }
+    ]
+};
+
+text.files  = fran;
 
 init.inject(text);
