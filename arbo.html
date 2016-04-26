@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BadAssEditor</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/git.css">
+        <link rel="stylesheet" href="css/app.css" />
+		        <link rel="stylesheet" href="css/buttonDir.css" />
+
+		
+    </head>
+    <body>
+        <!--mise en place vertical flexible dans body-->
+      <div id="middle">
+        <!-- middle prend la place vertical restant dans body-->
+        <!--mise en place horizontal flexible dans middle-->
+        <nav><ul>
+            <li id="text_button">TEXTE</li>
+            <li id="schema_button">SCHEMA</li>
+            <li id="photo_button">PHOTO</li>
+        </ul></nav>
+       
+		
+        <div id="git"></div>
+	
+		<div id="dir" style=" position:relative; top:200px; margin-left: auto;margin-right: auto;">
+		</div>
+
+      </div>
+    
+    </body>
+</html>
+
+
+
+<script>
+
+var dossier = [];
+
+
+var pere;
+
+var arbo = {"tree":
+	
+	[
+	
+	{
+			"nom": "Semestre1",
+			"couleur": "#0F0",
+						"id":1,
+
+			"child":[
+				{
+					"nom": "cours",
+					"couleur": "#000",
+								"id":2,
+
+
+					"child":[]
+				},
+				{
+						"nom": "TD",
+						"couleur": "#000",
+									"id":3,
+
+
+						"child":[]
+				},
+				{
+						"nom": "TP",
+						"couleur": "#000",
+						"id":4,
+
+						"child":[]
+				}
+			]
+		},
+	
+		{
+			"nom": "cours 2",
+			"couleur": "#0F0",
+						"id":6,
+
+
+			"child":[
+				{
+					"nom": "cours",
+					"couleur": "#000",
+								"id":7,
+
+
+					"child":[]
+				},
+				{
+						"nom": "TD",
+						"couleur": "#000",
+									"id":8,
+
+
+						"child":[]
+				},
+				{
+						"nom": "TP",
+						"couleur": "#000",
+						"id":9,
+
+						"child":[]
+				}
+			]
+		}
+	 ] 
+};
+
+
+
+
+function afficheDossier(){
+	var div = "";
+	if(dossier.length==[]){
+		document.getElementById("dir").innerHTML = "<h2>vide</h2> <button class=\"buttondir\" onclick=\"afficheRacine();\" >return</button>";
+
+		return;
+		}
+	for(var i = 0 ;i < dossier.length;i++)
+		div = div + "<button class=\"buttondir\" onclick=\"afficheById("+dossier[i].id+");\"   id="+dossier[i].id+">"+dossier[i].nom+"</button>";
+	
+	div = div + "<button class=\"buttondir\" onclick=\"afficheRacine();\">return</button>";
+	document.getElementById("dir").innerHTML = div;
+
+}
+	
+
+
+
+
+
+
+
+function afficheById(id){
+	dossier=[];
+	for(var i = 0; i < arbo.tree.length; i++){
+		if(arbo.tree[i].id == id){
+			for(var j= 0; j < arbo.tree[i].child.length; j++){
+				var c = arbo.tree[i].child[j];
+				dossier.push(c);
+			}
+			}
+	
+}
+
+afficheDossier();
+
+}
+
+
+
+
+
+
+
+
+
+
+function afficheRacine(){
+	dossier=[];
+	for(var i = 0; i < arbo.tree.length; i++){
+			var c = arbo.tree[i];
+				dossier.push(c);
+	}
+			
+	
+afficheDossier();
+
+
+
+}
+afficheRacine();
+
+
+
+
+
+
+
+
+</script>
