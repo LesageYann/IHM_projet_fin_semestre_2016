@@ -1,0 +1,6 @@
+Yop, désolé pour le titre mais c'est pour que ce soit facile à trouver. Pour ce qui est de la synthèse vocale, faudrait que celui
+qui amène son PC pour la démo dl ce plugin sur firefox. C'est une synthétisation vocale qui marche bien. 
+En plus elle est simple à utiliser. Une fois installer, il suffit de sélectionner une partie d'un texte, et une icone apparait au dessus
+de ce texte en forme de haut parleur. Simple clic dessus et BIM ! une gentille madame lit le texte.
+
+https://addons.mozilla.org/fr/firefox/addon/google-text-to-speech/
