@@ -5,6 +5,7 @@
 var init={module:{}};
 
 init.inject=function (module){
+    try{
     init.module[module.id]=module;
     init.module[module.id].elem=document.getElementById(module.id);
     init.module[module.id].elem.innerHTML=module.getHTML();
@@ -12,9 +13,13 @@ init.inject=function (module){
         console.log("afterinject");
         module.afterInject();
     }
+    }catch(e){
+        console.log(e)
+    }
 };
 
 init.show=function(name){
+    try{
     console.log("show",init.module)
     for(var i in init.module){
         console.log(i);
@@ -24,6 +29,9 @@ init.show=function(name){
     init.module[name].elem.style.display='block';
     init.actif=init.module[name];
     init.module['git'].elem.style.display='block';
+    }catch(e){
+        console.log(e, i)
+    }
 };
 
 document.getElementById("text_button").addEventListener('click',function(){
@@ -36,6 +44,7 @@ document.getElementById("schema_button").addEventListener('click',function(){
     schema.ctx=schema.canvas.getContext("2d");
     schema.pathMethod= schema.ctx.fill;
     schema.ctx.fillStyle = "red";
+    schema.pathMethod= "stroke";
 });
 document.getElementById("photo_button").addEventListener('click',function(){
     init.show('photo');

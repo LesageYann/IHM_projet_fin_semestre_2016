@@ -15,11 +15,13 @@ schema.getHTML=function(){
     +"<button id=\"schem_fill\"><img src=\"css/fill.png\" alt=\"forme remplie\" /></button>"
     +"<button id=\"schem_attach\"><img src=\"css/attach.png\" alt=\"transferer vers Document\" /></button>"
     +"<button id=\"schem_erase\"><img src=\"css/erase.png\" alt=\"effacer\" /></button>"
+    +"<input class=\"color\" value=\"66ff00\">"
     +"</div></div>";
 };
 
 schema.mouseDown=function(event){
     console.log("mouseDown",event);
+    schema.ctx.fillStyle = "#"+document.getElementsByClassName("color")[0].value;
     schema.ctx.beginPath();
     schema.ctx.moveTo(event.layerX, event.layerY);
 };
@@ -43,6 +45,7 @@ schema.afterInject=function(){
     schema.canvas.onmousedown= schema.mouseDown;
     schema.canvas.onmousemove= schema.mouseMove;
     schema.canvas.onmouseup= schema.mouseUp;
+    schema.pathMethod= "stroke";
     schema.pathElem=document.getElementById("schem_path");
     document.getElementById("schem_add").onclick=function(){
         

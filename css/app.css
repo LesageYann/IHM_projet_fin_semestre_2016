@@ -54,6 +54,9 @@ ul {
   display: none;
   box-sizing: border-box;
 }
+#shortcutsTab {
+    background: whitesmoke;
+}
 
 /*text*/
 #text > div {

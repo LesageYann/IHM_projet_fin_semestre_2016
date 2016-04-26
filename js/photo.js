@@ -1,5 +1,5 @@
-var cam ={
-    id:'cam',
+var photo ={
+    id:'photo',
     sections:[],
     activeSection:null,
     color:[
@@ -7,22 +7,22 @@ var cam ={
     ]
 };
 
-cam.files={
+photo.files={
     Error:[{
         cam:"Aucune caméra détectée"
     }]
 };
 
 
-cam.getHTML=function(){
-    return "<div><div id=\"photo_comp\"></div><div id=\"photo_content\"></div></div>";
+photo.getHTML=function(){
+    return "<div><div id=\"photo_comp\"></div><div id=\"photo_content\">Aucune caméra détectée</div></div>";
 };
 
-cam.afterInject=function(){
-    cam.comp=document.getElementById("cam_comp");
-    cam.content=document.getElementById("cam_content");
-    cam.load("Error");
-    init.show('cam');
-    cam.content.addEventListener('click',cam.handleClick);
+photo.afterInject=function(){
+    photo.comp=document.getElementById("photo_comp");
+    photo.content=document.getElementById("photo_content");
+    //photo.load("Error");
+    //init.show('');
+    photo.content.addEventListener('click',photo.handleClick);
 }
-init.inject(cam);
+init.inject(photo);

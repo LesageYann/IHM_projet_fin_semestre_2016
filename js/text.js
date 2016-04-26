@@ -16,50 +16,6 @@ var text ={
     ]
 };
 
-/*ensemble de fichier fake
- *
- */
-text.files={
-    ihm:[{
-        comprehension:5,
-        text:"IHM  dernier cours"
-    },{
-        comprehension:5,
-        text:["Déficiences physiques",
-            "Vue et ouïe qui baissent",
-            "Baisse de la coordination œil/main",
-            "Arthrite et tremblements qui baissent la dextérité"
-        ]
-    },{
-        comprehension:5,
-        text:["Déficiences psychiques",
-            "Confusions",
-            "Perte de mémoire",
-            "Diminution dans la confiance de prise de décision",
-            "Ne distinguent pas ce qui est pertinent et ce qui ne l’est pas"
-        ]
-    },{
-        comprehension:5,
-        text:["Conséquences",
-            "Anxiété, frustration",
-            "Peur de paraître stupide",
-            "Peur de l’échec",
-            "Peur de casser",
-            "Redoute les changements"
-        ]
-    },{
-        comprehension:5,
-        text:[
-            "Problèmes",
-            "Difficulté pour apprendre",
-            "Manque d’intérêt"
-        ]
-    },{
-        comprehension:5,
-        text:[""]
-    }
-    ]
- };
 var lang;
 window.onload = function() {
     lang = document.getElementById("language").value;
@@ -333,9 +289,9 @@ var fran={
         comprehension:5,
         id: "Conséquences",
         text:["Conséquences",
-            "Anxiety, frustration",
-            "Fear of looking stupid",
-            "Fear of failure",
+            "Anxiété, frustration",
+            "Peur de paraître stupide",
+            "Peur de l’échec",
             "Peur de casser",
             "Redoute les changements"
         ]
@@ -343,9 +299,9 @@ var fran={
         comprehension:5,
         id: "Problèmes",
         text:[
-            "Problems",
-            "Difficulty to learn",
-            "Lack of interest. Merci google trad"
+            "Problèmes",
+            "Difficulté pour apprendre",
+            "Manque d’intérêt"
         ]
     },{
         comprehension:5,
@@ -361,7 +317,7 @@ var eng={
     ihm:[{
         comprehension:5,
         id: "title",
-        text:"Last class IHM"
+        text:"Last lesson IHM"
     },{
         comprehension:5,
         id: "Physical disabilities",
